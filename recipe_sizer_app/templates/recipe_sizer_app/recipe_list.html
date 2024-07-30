@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Recipe List</h1>
+<a href="{% url 'recipe_create' %}" class="btn">Add New Recipe</a>
+<table>
+    <thead>
+        <tr>
+            <th>Owner</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for recipe in recipes %}
+        <li>
+            {{ recipe.title }} by {{ recipe.author }}
+            <a href="{% url 'recipe_update' recipe.pk %}">Edit</a>
+            <a href="{% url 'recipe_delete' recipe.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>    
+            No recipes have been defined
+        </li>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
